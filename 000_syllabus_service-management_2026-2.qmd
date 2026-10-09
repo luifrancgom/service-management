@@ -1,0 +1,404 @@
+---
+title: "Syllabus Electiva II: Negociación de Conflictos Module A AE"
+author:
+  - name: Luis Francisco Gómez López
+    email: luis.gomezl@unimilitar.edu.co
+    affiliations:
+      - name: Universidad Militar Nueva Granada
+date: 2026-10-08
+date-modified: last-modified
+date-format: iso
+format:
+  html: 
+    number-sections: true
+    toc: true
+    embed-resources: true
+execute: 
+  echo: false
+  warning: false
+  message: false
+params:
+  meeting_info:
+    value:
+      phone: +57 3124541536
+      days: [Tuesday]
+      start_hour: 17:00
+      end_hour: 19:00
+  block:
+    value:
+      start_date: 2026-09-21
+      end_date: 2026-11-28
+  schedule:
+    value:
+      meeting_dates: [3, 5]
+      dates_recess: [2026-10-05, 2026-10-11]
+      start_presentation_hour: 19:00
+      end_presentation_hour: 21:00  
+      start_syllabus_hour: 19:00
+      end_syllabus_hour: 20:00
+      start_activity_hour: 00:00
+      end_activity_hour: 21:00
+      start_exam_hour: 20:00
+      end_exam_hour: 21:00
+bibliography: service-management.bib
+editor: source
+---
+
+```{r}
+#| label: libraries
+
+library(tidyverse)
+library(glue)
+library(knitr)
+library(gt)
+```
+
+```{=html}
+<style>
+  p { 
+    text-align: justify;
+  }
+</style>
+```
+
+# Professor and meeting hours with students
+
+```{r}
+#| label: meeting-info
+
+# Days ----
+if (length(params$meeting_info$days) > 1) {
+  days_str <- glue_collapse(params$meeting_info$days, sep = ", ", last = " or ")
+} else {
+  days_str <- params$meeting_info$days[1]
+}
+```
+
+-   **Name**
+
+    -   `r rmarkdown::metadata$author[[1]]$name`
+
+-   **Communication through the virtual classroom**
+
+    -   For doubts and concerns of the topics of the course, please use the *Forum: Questions or concerns* that can be accessed at the top of the platform
+
+        -   In this way, doubts and concerns can be shared with all students and all course participants can contribute to the learning process
+
+    -   Complaints regarding grades, please send an email to [**`{r} rmarkdown::metadata$author[[1]]$email`**](mailto:%60r%20rmarkdown::metadata$author%5B%5B1%5D%5D$email%60)
+
+        -   Please wait for grades to be published on the News Bulletin Board before submitting any complaints. Complaints should be based on the feedback provided and must take into account the evaluation parameters.
+
+    -   For urgent issues, you can call me to `{r} params$meeting_info$phone` between `{r} params$meeting_info$start_hour` hours and `{r} params$meeting_info$end_hour` hours on `{r} days_str`. But, please do not send me whatsapp messages or call me on weekends.
+
+# Presentation and objectives of the subject
+
+## Description
+
+```{r}
+#| label: block
+
+# Dates ----
+start_date <- ymd(params$block$start_date)
+end_date <- ymd(params$block$end_date)
+
+str_start_end_date <- paste(
+  format(start_date, format = "%B %d"),
+  " - ",
+  format(end_date, format = "%B %d"),
+  sep = "",
+  ", ",
+  year(start_date)
+)
+```
+
+-   Credits: 3
+-   Type: Theoretical-Practice
+-   Area of Knowledge: Professional
+-   Semester: 3
+-   Block: (`{r} str_start_end_date`)
+
+## Justification
+
+The Service Management course serves as an integrating pillar within the curriculum across management marketing and information technology, offering a comprehensive view of how organizations design, deliver, and optimize services in a competitive, digital environment. Its pedagogical purpose is to equip future graduates not only to recognize service as a strategic differentiator, but also to manage it effectively by aligning organizational processes with customer expectations and technological capabilities.
+
+## Learning outcomes
+
+-   Course specific learning outcomes:
+
+    - Identifies value-generating service redesign opportunities by applying customer-centric business service design methodologies aligned with organizational objectives, grounded in the conceptual foundations of service management and the business-service gap.
+
+    - Recommends data-driven decisions that optimize customer experience and organizational productivity through the evaluation of service indicators related to satisfaction, efficiency, costs, and impact.   
+
+    - Develops user-centered trust-based relationships through the design, implementation, and evaluation of organizational services, applying analytical tools and outcome measurement across satisfaction, efficiency, and impact.   
+
+-   Transversal learning outcomes
+
+    - Produces oral and written communications through reading comprehension and active listening to substantiate ideas in academic or professional contexts.
+  
+    - Designs proposals grounded in prior knowledge to solve problem in professional or social contexts.
+ 
+    - Applies ICT tools in in-person or virtual environments to analyze information and adapt to emerging technological scenarios.
+
+# Schedule and contents
+
+## Reading schedule
+
+```{r}
+#| label: tbl-reading-schedule
+#| tbl-cap: Reading schedule
+
+bordoloi <- rep("[@bordoloi_service_2023]", times = 3)
+
+tibble(
+  Week = c("1", "2", "3", "3", "4", "5", "5", "6", "7", "8", "8"),
+  Material = c(
+    bordoloi,
+    "Case I",
+    bordoloi[-1],
+    "Case II",
+    bordoloi,
+    "Case III"
+  ),
+  `Chapter or Case` = c(
+    "2",
+    "3",
+    "4",
+    "Case I",
+    "5",
+    "6",
+    "Case II",
+    "11",
+    "12",
+    "13",
+    "Case III"
+  ),
+  `Initial page` = c(
+    "27",
+    "60",
+    "88",
+    " ",
+    "111",
+    "141",
+    " ",
+    "291",
+    "328",
+    "350",
+    " "
+  ),
+  `Final page` = c(
+    "56",
+    "87",
+    "109",
+    " ",
+    "140",
+    "177",
+    " ",
+    "326",
+    "349",
+    "373",
+    " "
+  ),
+  `Number of pages` = c(
+    "30",
+    "28",
+    "22",
+    "",
+    "30",
+    "37",
+    "",
+    "36",
+    "22",
+    "24",
+    ""
+  )
+) |>
+  gt() |>
+  fmt_markdown() |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_options(
+    row.striping.include_table_body = TRUE,
+    table.border.top.width = px(3),
+    table.border.top.color = "black",
+    column_labels.border.bottom.width = px(2),
+    column_labels.border.bottom.color = "black",
+    table.border.bottom.width = px(3),
+    table.border.bottom.color = "black"
+  )
+```
+
+## Detailed schedule
+
+### Module 1
+
+-   October 13
+
+    -   **Case I Opening**
+        -   **Opening time**: `r paste(params$schedule$start_activity_hour)` hours
+        -   **Prerequisites**:
+            -   Read and review [@thiell_hamburguesas_2017]
+
+-   October 13
+
+    -   **Virtual meeting Presentation Syllabus**
+        -   **Meeting time**: `r paste(params$schedule$start_syllabus_hour, params$schedule$end_syllabus_hour, sep = " - ")` hours
+        -   **Prerequisites**:
+            -   Review the course program in advance, which can be downloaded by following the route *1er Módulo \> Contenido y actividades complementarias \> Support material \> Presentations \> 000_syllabus_service-managent\_...*
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+-   October 13
+
+    -   **Virtual meeting Service Economy and Service Strategy**
+        -   **Meeting time**: `r paste(params$schedule$start_presentation_hour, params$schedule$end_presentation_hour, sep = " - ")` hours
+        -   **Prerequisites**:
+            -   Read and review [@bordoloi_service_2023, Chapter 2]
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+-   October 20
+
+    -   **Virtual meeting New Service Development**
+        -   **Meeting time**: `r paste(params$schedule$start_presentation_hour, params$schedule$end_presentation_hour, sep = " - ")` hours
+        -   **Prerequisites**:
+            -   Read and review [@bordoloi_service_2023, Chapter 3]
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+-   October 27
+
+    -   **Virtual meeting The Service Encounter**
+        -   **Meeting time**: `r paste(params$schedule$start_presentation_hour, params$schedule$end_presentation_hour, sep = " - ")` hours
+        -   **Prerequisites**:
+            -   Read and review [@bordoloi_service_2023, Chapter 4]
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+-   October 27
+
+    -   **Midterm Exam Three Party Coalition Exercise Round 1**
+        -   **Opening time**: `r paste(params$schedule$start_exam_hour)` hours
+        -   **Closing time**: `r paste(params$schedule$end_exam_hour)` hours
+        -   **Prerequisites**:
+            -   Read and review [@thiell_hamburguesas_2017]
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+### Module 2
+
+-   November 2
+
+    -   **Case II Opening**
+        -   **Opening time**: `r paste(params$schedule$start_activity_hour)` hours
+        -   **Prerequisites**:
+            -   Read and review [@sasser_benihana_2023]
+
+-   November 3
+
+    -   **Virtual meeting Supporting Facility and Process Flows**
+        -   **Meeting time**: `r paste(params$schedule$start_presentation_hour, params$schedule$end_presentation_hour, sep = " - ")` hours
+        -   **Prerequisites**:
+            -   Read and review [@bordoloi_service_2023, Chapter 5]
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+-   November 10
+
+    -   **Virtual meeting Service Quality**
+        -   **Meeting time**: `r paste(params$schedule$start_presentation_hour, params$schedule$end_presentation_hour, sep = " - ")` hours
+        -   **Prerequisites**:
+            -   Read and review [@bordoloi_service_2023, Chapter 6]
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+-   November 10
+
+    -   **Case II Closing**
+        -   **Opening time**: `r paste(params$schedule$start_exam_hour)` hours
+        -   **Closing time**: `r paste(params$schedule$end_exam_hour)` hours
+        -   **Prerequisites**:
+            -   Read and review [@sasser_benihana_2023]
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+### Module 3
+
+-   November 16
+
+    -   **Case III Opening**
+        -   **Opening time**: `r paste(params$schedule$start_activity_hour)` hours
+        -   **Prerequisites**:
+            -   Read and review [@heskett_shouldice_2005]
+
+-   November 17
+
+    -   **Virtual meeting Managing Capacity and Demand**
+        -   **Meeting time**: `r paste(params$schedule$start_presentation_hour, params$schedule$end_presentation_hour, sep = " - ")` hours
+        -   **Prerequisites**:
+            -   Read and review [@bordoloi_service_2023, Chapter 11]
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+-   November 24
+
+    -   **Virtual meeting Managing Waiting Lines**
+        -   **Meeting time**: `r paste(params$schedule$start_presentation_hour, params$schedule$end_presentation_hour, sep = " - ")` hours
+        -   **Prerequisites**:
+            -   Read and review [@bordoloi_service_2023, Chapter 12]
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+-   December 1
+
+    -   **Virtual meeting Capacity Planning and Queuing Models**
+        -   **Meeting time**: `r paste(params$schedule$start_presentation_hour, params$schedule$end_presentation_hour, sep = " - ")` hours
+        -   **Prerequisites**:
+            -   Read and review [@bordoloi_service_2023, Chapter 13]
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+-   December 1
+
+    -   **Case III Closing**
+        -   **Opening time**: `r paste(params$schedule$start_exam_hour)` hours
+        -   **Closing time**: `r paste(params$schedule$end_exam_hour)` hours
+        -   **Prerequisites**:
+            -   Read and review [@heskett_shouldice_2005]
+            -   Have a headset with a built-in microphone to isolate noise from the environment
+
+# Qualifiable activities, weights and process in case of no presentation
+
+## Activities and weights
+
+-   **Module 1**: 30%
+
+    -   **Case I**: 15%
+
+-   **Module 2**: 30%
+
+    -   **Case II**: 30%
+
+-   **Module 3**: 40%
+
+    -   **Case III**: 40%
+
+## Process in case of no presentation
+
+-   Students who do not present a **Questionnaire** due to force majeure or illness, must send the respective excuse scanned to [**luis.gomezl\@unimilitar.edu.co**](mailto:luis.gomezl@unimilitar.edu.co){.email}. If it is not sent, the note will be zero. Once the excuse has been satisfactorily received, the student should **not** present the activity and the corresponding grade will be equal to the immediately subsequent grade obtained in the **Midterm Exam 1** or **Midterm Exam 2** or **Final Exam** according to the case.
+
+-   Students who do not present a **Midterm Exam 1** or **Midterm Exam 2** or the **Final Exam**, must send and email to [**admon.distancia\@unimilitar.edu.co**](mailto:admon.distancia@unimilitar.edu.co){.email} two days before or two days after the closing date of these activities. However, this request can be made only once during the course. If it is not requested under these conditions, the grade will be zero.
+
+# Use of Chat GPT-4, Gemini 1.5, Copilot and its friends
+
+In this course, the use of generative artificial intelligence tools is allowed as long as you follow the following good practices [@equipo_proyecto_ia-uniandes_lineamientos_2024, pp. 20-21]:
+
+-   **Informed use**: learn beforehand how the tool works, its limitations, and risks
+-   **Transparent use**: report which tool you used and how it was used it
+-   **Ethical use**: do not present material generated by the tool as your own and follow the corresponding citation rules (see [@mcadoo_how_2024]).
+-   **Critical evaluation**: always contrast and compare any response obtained through the tool with reliable or primary sources of information
+-   **Responsible use**: do not include personal or confidential information (own or others) when entering instructions (prompts)
+
+For more detailed guidance on good practices and recommended uses, check out [@equipo_proyecto_ia-uniandes_lineamientos_2024, Section 3.2]
+
+# Study material
+
+-   [@bordoloi_service_2023, Chapters 2, 3, 4, 5, 6, 11, 12, 13]
+
+    -   The book can be consulted through the virtual classroom
+
+-   Cases
+
+    -   Cases [@thiell_hamburguesas_2017], [@sasser_benihana_2023] and [@heskett_shouldice_2005] can be consulted through the virtual classroom
+
+# References {.unnumbered}
